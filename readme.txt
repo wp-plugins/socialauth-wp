@@ -14,6 +14,8 @@ SocialAuth-WP a Wordpress 3.0+ plugin which enables social login integration and
 
 SocialAuth-WP a Wordpress 3.0+ plugin derived from popular PHP based HybridAuth library. Inspired from other Wordpress social login plugins, this plugin seamlessly integrates into any Wordpress 3.0+ application and enables social login integration through different service providers. All you have to do is to configure the plugin from settings page before you can start using it. SocialAuth-WP hides all the intricacies of generating signatures and token, doing security handshakes and provides an out of the box a simple solution to interact with providers.
 
+Please check out our [detailed wiki](http://code.google.com/p/socialauth-wp/) for complete information on this plugin.
+
 == Installation ==
 
 * Login to your wordpress site as admin, go to plugins menu and search for "SocialAuth-WP".

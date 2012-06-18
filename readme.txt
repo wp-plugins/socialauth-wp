@@ -29,7 +29,7 @@ Please check out our [detailed wiki](http://code.google.com/p/socialauth-wp/) fo
 
 = Where can I find more information? =
 
-Please check out our [detailed wiki](http://code.google.com/p/socialauth-wp/) for complete information on this plugin.
+Please check out our [detailed wiki](http://code.google.com/p/socialauth-wordpress/) for complete information on this plugin.
 
 = Where will I get the application keys? =
 

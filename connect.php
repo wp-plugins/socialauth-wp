@@ -103,10 +103,16 @@
 
             $SocialAuth_WP_user_home = get_option('SocialAuth_WP_user_home_page');
             $user_home_page = !empty($SocialAuth_WP_user_home)? $SocialAuth_WP_user_home : get_site_url();
-            echo "<script type='text/javascript'>
-            opener.location.href = '" . $user_home_page ."';
-            close();
-            </script>";
+            $authDialogPosition = get_option('SocialAuth_WP_authDialog_location');
+            if(!empty($authDialogPosition) && $authDialogPosition == 'page')
+            {
+                 header('Location: ' . $user_home_page);
+            }else {
+                echo "<script type='text/javascript'>
+                opener.location.href = '" . $user_home_page ."';
+                close();
+                </script>";
+            }
         }
         catch( Exception $e ){
             $message = "Some strange error occured, Please try again Later...";
@@ -127,6 +133,9 @@
     <p class='highlighted'>Followin are the details of error : </p> 
     <p><?php echo $message; ?></p>
     <p><?php echo 'Error reason: ' .$e->getMessage(); ?></p>
+    <?php if(!empty($authDialogPosition) && $authDialogPosition == 'page') { ?>
+        <p class="">&laquo; <a href="<?php echo wp_get_referer(); ?>" >Back to Login Page</a></p>
+    <?php } ?>
 </div>
 <?php
         die();

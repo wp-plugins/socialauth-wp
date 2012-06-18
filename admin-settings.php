@@ -6,7 +6,7 @@ function SocialAuth_WP_admin_menu(){
     //create options page
     add_options_page(
         'Social Auth PHP',
-        'SocialAuth-WP',
+        'SocialAuth-WordPress',
         'manage_options',
         'socialauth-wp-settings',
         'SocialAuth_WP_render_settings_page'
@@ -28,17 +28,26 @@ function SocialAuth_WP_admin_menu(){
 function SocialAuth_WP_register_settings() {
     //register our settings
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_user_role' );
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_authDialog_location' );
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_user_home_page' );
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_providers' );
 }
 
 function SocialAuth_WP_scripts()
 {
+    echo '<link type="text/css" rel="stylesheet" href="' . plugin_dir_url(__FILE__) . 'assets/css/display_order.css" />' . "\n";
+
     //We can include as many Javascript files as we want here.
     wp_enqueue_script(
         "SocialAuth_WP_settings_script",
          plugin_dir_url(__FILE__) . "assets/js/settings.js",
          array('jquery')
+    );
+    
+    wp_enqueue_script(
+        "SocialAuth_WP_settings_script_for_display_order",
+         plugin_dir_url(__FILE__) . "assets/js/display_order.js",
+         array('jquery','jquery-ui-sortable')
     );
 }
 
@@ -50,10 +59,11 @@ function SocialAuth_WP_render_settings_page(){
         $wp_roles = new WP_Roles();
     $roles = $wp_roles->get_names();
     $SocialAuth_WP_providers = get_option('SocialAuth_WP_providers');
+
 ?>
     <div class="wrap">
         <div class="icon32" id="icon-options-general"><br></div>
-        <h2><?php _e('SocialAuth-WP Settings', 'SocialAuth-WP'); ?></h2>
+        <h2><?php _e('SocialAuth-WordPress Settings', 'SocialAuth-WP'); ?></h2>
     
         <form method="post" action="options.php">
         <?php settings_fields( 'SocialAuth-WP-settings' ); ?>
@@ -86,11 +96,56 @@ function SocialAuth_WP_render_settings_page(){
                     </td>
                 </tr>
                 <?php } ?>
+                 <tr valign="top">
+                    <th scope="row"><label for ="SocialAuth_WP_authDialog_location" ><?php _e('Authentication Happens on', 'SocialAuth_WP'); ?></label></th>
+                    <td>
+                        <select name="SocialAuth_WP_authDialog_location">
+                        <?php 
+                            $authDialogPositions = array('popup' => 'In a Pop-up Window', 'page' => 'On Same Page');
+                            $authDialogPosition = get_option('SocialAuth_WP_authDialog_location');
+                            if(empty($authDialogPosition))
+                            {
+                                $authDialogPosition = 'popup';
+                            }
+                              foreach($authDialogPositions as $key => $position)
+                              {
+                                  if($authDialogPosition == $key) 
+                                      echo "<option value='" .$key . "' selected='selected'>" .$position . "</option>";
+                                  else 
+                                      echo "<option value='" .$key . "'>" .$position . "</option>";
+                              }
+                          ?>
+                        
+                        </select>
+                        <span class="description">Control how and where authentication dialog will appear.</span>
+                    </td>
+                </tr>
                 <tr valign="top">
                     <th scope="row"><label for ="SocialAuth_WP_user_home_page" ><?php _e('Home Page', 'SocialAuth_WP'); ?></label></th>
                     <td>
                         <input class="regular-text" type="text" name="SocialAuth_WP_user_home_page" value="<?php echo get_option('SocialAuth_WP_user_home_page'); ?>"/>
                         <span class="description">This is the very first page user will go to after successful login.</span>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row"><label for ="SocialAuth_WP_provider_display_order" ><?php _e('Provider Display Order', 'SocialAuth_WP'); ?></label></th>
+                    <td>
+                        <?php $images_url = plugin_dir_url(__FILE__) .'assets/images/'; ?>
+                        <ul id="providerlist" class="ui-sortable">
+                        <?php 
+                        // sort by display_order
+                        uasort($SocialAuth_WP_providers, 'compare_displayOrder');
+                        foreach($SocialAuth_WP_providers as $name => $details) { 
+                            $details = $HA_PROVIDER_CONFIG['providers'][$name];
+                        ?>
+                            <li class="<?php echo $name; ?>">
+                                <img alt="<?php echo $name; ?>" src="<?php echo $images_url . strtolower($name) . '_32.png'; ?>" />
+                            </li>
+                        <?php
+                        }
+                        ?>
+                        </ul>
+                        <span class="description">Drag and drop icons to arrange them, and they will appear on login page in same order.</span>
                     </td>
                 </tr>
             </table>
@@ -106,6 +161,7 @@ function SocialAuth_WP_render_settings_page(){
                         <?php
                         if(isset($settings['enabled'])) { ?>
                             <fieldset>
+                                <input type="hidden" class="<?php echo $provider; ?>" name="SocialAuth_WP_providers[<?php echo $provider; ?>][display_order]" value="<?php echo isset($SocialAuth_WP_providers[$provider]['display_order'])? $SocialAuth_WP_providers[$provider]['display_order'] : ""; ?>" />
                                 <p><label><input type="radio" <?php echo (!isset($SocialAuth_WP_providers[$provider]['enabled']) || ($SocialAuth_WP_providers[$provider]['enabled'] == 0))? 'checked=\'checked\'' : ''; ?> class="SocialAuth_WP_adaptor_status" value="0" name="SocialAuth_WP_providers[<?php echo $provider ?>][enabled]">Disabled</label></p>
                                 <p><label><input type="radio" <?php echo (isset($SocialAuth_WP_providers[$provider]['enabled']) && ($SocialAuth_WP_providers[$provider]['enabled'] == 1))? 'checked=\'checked\'' : ''; ?> class="SocialAuth_WP_adaptor_status" value="1" name="SocialAuth_WP_providers[<?php echo $provider ?>][enabled]">Enabled</label></p>
                                 <ul>

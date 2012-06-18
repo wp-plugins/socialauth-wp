@@ -2,8 +2,8 @@
 /*
 Plugin Name: SocialAuth-WordPress
 Plugin URI: http://code.google.com/p/socialauth-wp/
-Description: SocialAuth-WP a Wordpress 3.0+ plugin derived from popular PHP based HybridAuth library. Inspired from other Wordpress social login plugins, this plugin seamlessly integrates into any Wordpress 3.0+ application and enables social login integration through different service providers. All you have to do is to configure the plugin from settings page before you can start using it. SocialAuth-WP hides all the intricacies of generating signatures and token, doing security handshakes and provides an out of the box a simple solution to interact with providers.
-Version: 1.0.1
+Description: SocialAuth-WordPress is a Wordpress 3.0+ plugin derived from popular PHP based HybridAuth library. Inspired from other Wordpress social login plugins, this plugin seamlessly integrates into any Wordpress 3.0+ application and enables social login integration through different service providers. All you have to do is to configure the plugin from settings page before you can start using it. SocialAuth-WP hides all the intricacies of generating signatures and token, doing security handshakes and provides an out of the box a simple solution to interact with providers.
+Version: 1.2.2
 Author: tsg@brickred.com
 Author URI: http://opensource.brickred.com/wordpress
 License: MIT License
@@ -40,13 +40,13 @@ function SocialAuth_WP_install() {
     if(!function_exists( 'register_post_status' ) || !function_exists( 'curl_version' ) || !function_exists( 'hash' ) || version_compare( PHP_VERSION, '5.1.2', '<' ) ) {
         deactivate_plugins( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ) );
         if(!function_exists( 'register_post_status'))
-            wp_die( sprintf( __( "Sorry, but you can not install Plugin 'SocialAuth-WP'. It requires WordPress 3.0 or newer. Consider <a href='http://codex.wordpress.org/Updating_WordPress'>upgrading</a> your WordPress installation, it's worth the effort.<br/><a href=\"%s\">Return to Plugins Admin page &raquo;</a>", 'SocialAuth_WP'), admin_url( 'plugins.php' ) ), 'SocialAuth_WP' );
+            wp_die( sprintf( __( "Sorry, but you can not install Plugin 'SocialAuth-WordPress'. It requires WordPress 3.0 or newer. Consider <a href='http://codex.wordpress.org/Updating_WordPress'>upgrading</a> your WordPress installation, it's worth the effort.<br/><a href=\"%s\">Return to Plugins Admin page &raquo;</a>", 'SocialAuth_WP'), admin_url( 'plugins.php' ) ), 'SocialAuth_WP' );
         elseif ( !function_exists( 'curl_version' ) )
-            wp_die( sprintf( __( "Sorry, but you can not install Plugin 'SocialAuth-WP'. It requires the <a href='http://www.php.net/manual/en/intro.curl.php'>PHP libcurl extension</a> to be installed. Please contact your web host and request libcurl be <a href='http://www.php.net/manual/en/intro.curl.php'>installed</a>.<br/><a href=\"%s\">Return to Plugins Admin page &raquo;</a>", 'SocialAuth_WP'), admin_url( 'plugins.php' ) ), 'SocialAuth_WP' );
+            wp_die( sprintf( __( "Sorry, but you can not install Plugin 'SocialAuth-WordPress'. It requires the <a href='http://www.php.net/manual/en/intro.curl.php'>PHP libcurl extension</a> to be installed. Please contact your web host and request libcurl be <a href='http://www.php.net/manual/en/intro.curl.php'>installed</a>.<br/><a href=\"%s\">Return to Plugins Admin page &raquo;</a>", 'SocialAuth_WP'), admin_url( 'plugins.php' ) ), 'SocialAuth_WP' );
         elseif ( !function_exists( 'hash' ) )
-            wp_die( sprintf( __( "Sorry, but you can not install Plugin 'SocialAuth-WP'. It requires the <a href='http://www.php.net/manual/en/intro.hash.php'>PHP Hash Engine</a>. Please contact your web host and request Hash engine be <a href='http://www.php.net/manual/en/hash.setup.php'>installed</a>.<br/><a href=\"%s\">Return to Plugins Admin page &raquo;</a>", 'SocialAuth_WP'), admin_url( 'plugins.php' ) ), 'SocialAuth_WP' );
+            wp_die( sprintf( __( "Sorry, but you can not install Plugin 'SocialAuth-WordPress'. It requires the <a href='http://www.php.net/manual/en/intro.hash.php'>PHP Hash Engine</a>. Please contact your web host and request Hash engine be <a href='http://www.php.net/manual/en/hash.setup.php'>installed</a>.<br/><a href=\"%s\">Return to Plugins Admin page &raquo;</a>", 'SocialAuth_WP'), admin_url( 'plugins.php' ) ), 'SocialAuth_WP' );
         else
-            wp_die( sprintf( __( "Sorry, but you can not install Plugin 'SocialAuth-WP'. It requires PHP 5.1.2 or newer. Please contact your web host and request they <a href='http://www.php.net/manual/en/migration5.php'>migrate</a> your PHP installation to run WP-Social-Auth.<br/><a href=\"%s\">Return to Plugins Admin page &raquo;</a>", 'SocialAuth_WP'), admin_url( 'plugins.php' ) ), 'SocialAuth_WP' );
+            wp_die( sprintf( __( "Sorry, but you can not install Plugin 'SocialAuth-WordPress'. It requires PHP 5.1.2 or newer. Please contact your web host and request they <a href='http://www.php.net/manual/en/migration5.php'>migrate</a> your PHP installation to run WP-Social-Auth.<br/><a href=\"%s\">Return to Plugins Admin page &raquo;</a>", 'SocialAuth_WP'), admin_url( 'plugins.php' ) ), 'SocialAuth_WP' );
     }
     do_action( 'SocialAuth_WP_installation' );
 }

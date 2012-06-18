@@ -18,3 +18,13 @@ if(isset($HA_CONFIG) && is_array($HA_CONFIG)) {
 function get_ha_config(){
     return include_once SOCIALAUTH_WP_HYBRIDAUTH_DIR_PATH . '/config.php';
 }
+
+function compare_displayOrder($a, $b)
+{
+    if(!isset($a['display_order']) || !isset($b['display_order']))
+        return 0;
+    if ($a['display_order'] == $b['display_order']) {
+        return 0;
+    }
+    return ($a['display_order'] < $b['display_order']) ? -1 : 1;
+}

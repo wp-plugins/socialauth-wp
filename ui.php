@@ -8,10 +8,19 @@ function sc_render_login_form_SocialAuth_WP() {
     $SocialAuth_WP_providers = get_option('SocialAuth_WP_providers');
     if(is_array($SocialAuth_WP_providers) && count($SocialAuth_WP_providers))
     {
+        $authDialogPosition = get_option('SocialAuth_WP_authDialog_location');
+        // sort by display_order
+        uasort($SocialAuth_WP_providers, 'compare_displayOrder');
         foreach($SocialAuth_WP_providers as $name => $details)
         {
             if(isset($details['enabled']) && $details['enabled']) {
-                echo '<a href="' . plugin_dir_url(__FILE__) . 'connect.php?provider=' .$name . '" title="' . $name . '" class="SocialAuth_WP_login"><img alt="' .  $name. '" src="' . $images_url . strtolower($name) . '_32.png" /></a>';
+                if($authDialogPosition == 'page') {
+                    echo '<a href="' . plugin_dir_url(__FILE__) . 'connect.php?provider=' .$name . '" title="' . $name . '" class=""><img alt="' .  $name. '" src="' . $images_url . strtolower($name) . '_32.png" /></a>';
+                }
+                else
+                {
+                    echo '<a href="' . plugin_dir_url(__FILE__) . 'connect.php?provider=' .$name . '" title="' . $name . '" class="SocialAuth_WP_login"><img alt="' .  $name. '" src="' . $images_url . strtolower($name) . '_32.png" /></a>';
+                }
             }
         }
     }

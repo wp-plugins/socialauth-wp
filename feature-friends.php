@@ -78,8 +78,9 @@ function SocialAuth_WP_contacts(){
     ?>
         <?php
     if (count($ContactPages) != 0) {
+        echo $pageNumbers = '<div class="numbers" style="text-align:right;" >'.$pagination->getLinks(array('page' => 'SocialAuth-WP-contacts')).'</div>';
     ?>
-        
+    
     <table class="wp-list-table widefat fixed users">
     <thead>
     <tr>
@@ -121,14 +122,14 @@ function SocialAuth_WP_contacts(){
             <?php echo   $contact->displayName; ?>
         </td>
                 
-        <td class="role column-role">
+        <td class="posts">
             <a href="<?php echo $contact->profileURL;?>">
                 <?php echo $contact->profileURL;?>
             </a>
         </td>
         
-        <td class="posts column-posts num">
-            <?php echo $contact->email; ?>
+        <td class="posts">
+            <?php echo (empty($contact->email))? "&nbsp;" : $contact->email; ?>
         </td>
     </tr>
     
@@ -136,7 +137,7 @@ function SocialAuth_WP_contacts(){
     </tbody>
     </table>
     <?php
-    echo $pageNumbers = '<div class="numbers">'.$pagination->getLinks(array('page' => 'SocialAuth-WP-contacts')).'</div>';
+    echo $pageNumbers = '<div class="numbers" style="text-align:right;" >'.$pagination->getLinks(array('page' => 'SocialAuth-WP-contacts')).'</div>';
     }
     ?>
     <?php }

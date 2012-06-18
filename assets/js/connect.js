@@ -16,9 +16,10 @@ jQuery.noConflict();
             params += ', scrollbars=1';
             params += ', status=no';
             params += ', toolbar=no';
-            connect_window =  window.open(
+            
+            var connect_window =  window.open(
                 uri,
-                "SocialAuth-WP Login",
+                "SocialAuth_WordPress",
                 params
             );
             if (window.focus) {

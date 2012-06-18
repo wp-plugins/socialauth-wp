@@ -1,7 +1,7 @@
 === Socialauth-WordPress ===
 Contributors: tsg@brickred.com
 Donate link: http://www.brickred.com/contact-us
-Tags: hybridauth, authentication, contacts, friendlist, socialauth, providers, social-media
+Tags: socialauth wordpress, social login integration, hybridauth, authentication, contacts, friendlist, providers
 Requires at least: 3.0.0
 Tested up to: 3.3.2
 Stable tag: 1.0.1
@@ -52,6 +52,11 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 
 == Changelog ==
 
+= 1.2.2 =
+* Added functionality to set display order of providers on login page
+* Added new option in settings page to set how authentication will open (There are 2 options - In page itself and In a pop-up window) 
+* Fixed a bug related to "Not all Google contacts are shown" thread raised by some user on support.
+
 = 1.0.1 =
 * Fix 'file not found error' when authenticating with a provider.
 
@@ -59,6 +64,9 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 * First stable release
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+There has been 1 bug fix and addition of 2 new features since last release. Update to get latest.
 
 = 1.0.1 =
 There has been 1 bug fix since last release. Update to get latest.

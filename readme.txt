@@ -14,7 +14,7 @@ SocialAuth-WordPress a Wordpress 3.0+ plugin which enables social login integrat
 
 SocialAuth-WordPress a Wordpress 3.0+ plugin derived from popular PHP based HybridAuth library. Inspired from other Wordpress social login plugins, this plugin seamlessly integrates into any Wordpress 3.0+ application and enables social login integration through different service providers. All you have to do is to configure the plugin from settings page before you can start using it. SocialAuth-WordPress hides all the intricacies of generating signatures and token, doing security handshakes and provides an out of the box a simple solution to interact with providers.
 
-Please check out our [detailed wiki](http://code.google.com/p/socialauth-wp/) for complete information on this plugin.
+Please check out our [detailed wiki](http://code.google.com/p/socialauth-wordpress/) for complete information on this plugin.
 
 == Installation ==
 
@@ -73,7 +73,7 @@ There has been 1 bug fix since last release. Update to get latest.
 
 == Live Demo ==
 
-See the [live demo](http://opensource.brickred.com/wordpress/wp-login.php) now!
+See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 
 == Features == 
 
@@ -81,9 +81,11 @@ See the [live demo](http://opensource.brickred.com/wordpress/wp-login.php) now!
 * Access profile of logged in user (Email, First name, Last name, Profile picture)
 * See contacts/friends of logged in user. Friend information contains information such as email, profile URL and name.
 * More control over logout from application as well as authenticating provider.
-* Blog administrators can control the default role for users who register via SocialAuth-WordPress.
+* Administrator can control the default role for users who register via SocialAuth-WordPress.
+* Administrator can set display order of providers for login page.
+* Added new option in settings page to set how authentication will open (There are 2 options - In page itself and In a pop-up window) 
 
 == Benefits ==
 
-* Your blog users – Instead of creating new account on website, users can use their existing accounts from popular providers like Facebook etc. making it easier for them to access/contribute content.
+* Your blog users - Instead of creating new account on website, users can use their existing accounts from popular providers like Facebook etc. making it easier for them to access/contribute content.
 * Blog administrators/owners - With no registration requirement, users can quickly login to the site and use its features. Further, users trust big providers (like Facebook etc.) making them comfortable in login process. This fast and trusted login process definitely attracts potential users and increase site popularity. Site administrator can set the permission for users who will login with external login provider.

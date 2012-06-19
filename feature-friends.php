@@ -1,7 +1,7 @@
 <?php
 function SocialAuth_WP_contacts(){
     ini_set( "display_errors", 0);
-    $noContactMsg = "Either you do not have any contact or your login provider is not supporting this feature at the moment";
+    $noContactMsg = "Either you do not have any contact(s) or your login provider is not supporting this feature at the moment.";
     echo '<div class="wrap">';
     echo '<div class="icon32 icon32-posts-post" id="icon-edit"><br></div>';
     echo "<h2>My Contacts</h2> <br/>";
@@ -65,6 +65,7 @@ function SocialAuth_WP_contacts(){
     catch (exception $e)
     {
         echo $noContactMsg;
+        return;
     }
     
     if(count($contacts))

@@ -53,7 +53,7 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 
 == Changelog ==
 
-1.3.2 =
+= 1.3.2 =
 * Logged -in user profile picture/avatar source can be controlled from plugin settings. By default wordpress tries to fetch avatar from Http://gravatar.com using email address in you profile, you can overide that seting from plugin settings page and force wordpress to get profile pciture/avatar from social media provider user is currently logged-in with.
 
 = 1.2.2 =
@@ -69,7 +69,7 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 
 == Upgrade Notice ==
 
-= 1.2.2 =
+= 1.3.2 =
 There has been addition of 1 new features since last release. Update to get latest and enjoy more features.
 
 = 1.2.2 =

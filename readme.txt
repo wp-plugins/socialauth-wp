@@ -3,7 +3,7 @@ Contributors: tsg@brickred.com
 Donate link: http://www.brickred.com/contact-us
 Tags: socialauth wordpress, social login integration, hybridauth, authentication, contacts, friendlist, providers
 Requires at least: 3.0.0
-Tested up to: 3.3.2
+Tested up to: 3.4.2
 Stable tag: 1.2.2
 License: MIT License
 License URI: http://www.opensource.org/licenses/MIT
@@ -30,6 +30,7 @@ Please check out our [detailed wiki](http://code.google.com/p/socialauth-wordpre
 = Where can I find more information? =
 
 Please check out our [detailed wiki](http://code.google.com/p/socialauth-wordpress/) for complete information on this plugin.
+you can check [socialauth.in](http://socialauth.in) to get similar libraries in other technologies under SocialAuth umbrella.
 
 = Where will I get the application keys? =
 
@@ -52,6 +53,9 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 
 == Changelog ==
 
+1.3.2 =
+* Logged -in user profile picture/avatar source can be controlled from plugin settings. By default wordpress tries to fetch avatar from Http://gravatar.com using email address in you profile, you can overide that seting from plugin settings page and force wordpress to get profile pciture/avatar from social media provider user is currently logged-in with.
+
 = 1.2.2 =
 * Added functionality to set display order of providers on login page
 * Added new option in settings page to set how authentication will open (There are 2 options - In page itself and In a pop-up window) 
@@ -64,6 +68,9 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 * First stable release
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+There has been addition of 1 new features since last release. Update to get latest and enjoy more features.
 
 = 1.2.2 =
 There has been 1 bug fix and addition of 2 new features since last release. Update to get latest.

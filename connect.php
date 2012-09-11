@@ -97,6 +97,7 @@
             }
             if ( $user_id && is_integer( $user_id ) ) {
                 update_user_meta( $user_id, 'ha_login_provider', $provider );
+                update_user_meta( $user_id, 'profile_image_url', $ha_user_profile->photoURL);
             }
             wp_set_auth_cookie( $user_id );
             do_action( 'wp_login', $user_id );

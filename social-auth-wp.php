@@ -3,7 +3,7 @@
 Plugin Name: SocialAuth-WordPress
 Plugin URI: http://code.google.com/p/socialauth-wp/
 Description: SocialAuth-WordPress is a Wordpress 3.0+ plugin derived from popular PHP based HybridAuth library. Inspired from other Wordpress social login plugins, this plugin seamlessly integrates into any Wordpress 3.0+ application and enables social login integration through different service providers. All you have to do is to configure the plugin from settings page before you can start using it. SocialAuth-WP hides all the intricacies of generating signatures and token, doing security handshakes and provides an out of the box a simple solution to interact with providers.
-Version: 1.2.2
+Version: 1.3.2
 Author: tsg@brickred.com
 Author URI: http://opensource.brickred.com/wordpress
 License: MIT License
@@ -22,6 +22,7 @@ register_activation_hook(__FILE__,'SocialAuth_WP_install');
 register_deactivation_hook( __FILE__, 'SocialAuth_WP_remove' );
 
 add_action( 'logout_url', 'new_logout_url');
+add_filter('get_avatar', 'social_auth_wordpress_get_avatar', 10, 5);
 
 /* Show Settings page in Admin */
 require_once SOCIALAUTH_WP_PLUGIN_PATH .'/admin-settings.php';
@@ -52,9 +53,29 @@ function SocialAuth_WP_install() {
 }
 
 /* Action Called eveytime worpress is loaded. 
- * You can add any specif aciotn message here related to plugin 
+ * You can add any specific aciotn message here related to plugin 
  * */
-function SocialAuth_WP() {}
+function SocialAuth_WP() {
+
+}
+
+function social_auth_wordpress_get_avatar($avatar, $id_or_email, $size, $default, $alt){
+	
+	//$avatar format includes the tag <img>
+	$user_id = get_current_user_id();
+	$provider = get_user_meta( $user_id, 'ha_login_provider', true );
+	$profilePicSource = get_option('SocialAuth_WP_profile_picture_source');
+
+	if ($user_id != 0 && !empty($provider) && !empty($profilePicSource) && $profilePicSource == "authenticatingProvider")
+	{
+		$profileImageUrl = get_user_meta( $user_id, 'profile_image_url', true );
+		if(!empty($profileImageUrl))
+		{
+			$avatar = "<img src='".$profileImageUrl."' alt='".$alt."' height='".$size."' width='".$size."' />";
+		}
+	}
+	return $avatar;
+}
 
 /* Action Called eveytime plugin is un-installed.
 * You can add any specif aciotn message here related to plugin un-installation

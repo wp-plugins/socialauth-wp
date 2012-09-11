@@ -27,10 +27,11 @@ function SocialAuth_WP_admin_menu(){
 
 function SocialAuth_WP_register_settings() {
     //register our settings
-    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_user_role' );
-    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_authDialog_location' );
-    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_user_home_page' );
-    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_providers' );
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_user_role');
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_authDialog_location');
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_user_home_page');
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_providers');
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_profile_picture_source');
 }
 
 function SocialAuth_WP_scripts()
@@ -118,6 +119,30 @@ function SocialAuth_WP_render_settings_page(){
                         
                         </select>
                         <span class="description">Control how and where authentication dialog will appear.</span>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row"><label for ="SocialAuth_WP_profile_picture_source" ><?php _e('Profile Picture/Avatar Comes From', 'SocialAuth_WP'); ?></label></th>
+                    <td>
+                        <select name="SocialAuth_WP_profile_picture_source">
+                        <?php 
+                            $profilePicSources = array('authenticatingProvider' => 'Authenticating Provider', 'gravatar' => 'Gravatar');
+                            $profilePicSource = get_option('SocialAuth_WP_profile_picture_source');
+                            if(empty($profilePicSource))
+                            {
+                                $profilePicSource = 'providerImage';
+                            }
+                              foreach($profilePicSources as $key => $position)
+                              {
+                                  if($profilePicSource == $key) 
+                                      echo "<option value='" .$key . "' selected='selected'>" .$position . "</option>";
+                                  else 
+                                      echo "<option value='" .$key . "'>" .$position . "</option>";
+                              }
+                          ?>
+                        
+                        </select>
+                        <span class="description">Control from where profile pic/avatar comes from.</span>
                     </td>
                 </tr>
                 <tr valign="top">

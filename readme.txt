@@ -1,6 +1,6 @@
 === Socialauth-WordPress ===
-Contributors: tsg@brickred.com
-Donate link: http://www.brickred.com/contact-us
+Contributors: labs@3pillarglobal.com
+Donate link: http://www.3pillarglobal.com
 Tags: socialauth wordpress, social login integration, hybridauth, authentication, contacts, friendlist, providers
 Requires at least: 3.0.0
 Tested up to: 3.4.2

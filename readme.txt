@@ -1,5 +1,5 @@
 === Socialauth-WordPress ===
-Contributors: labs@3pillarglobal.com
+Contributors: tsg@brickred.com
 Donate link: http://www.3pillarglobal.com
 Tags: socialauth wordpress, social login integration, hybridauth, authentication, contacts, friendlist, providers
 Requires at least: 3.0.0

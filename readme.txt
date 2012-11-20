@@ -102,7 +102,7 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 
 == Plugin Settings ==
 
-SocialAuth-WordPress provides a nice settings interface to make it easy to use and configurable for your users and administrators out of the box.
+* SocialAuth-WordPress provides a nice settings interface to make it easy to use and configurable for your users and administrators out of the box.
 * You can configure the default role which will be given to users which will connects to your app with help of this plugin.
 * You can also set up a default landing page for the users using logon feautres of this plugin.
 * Setting inerface allows you to enable disable individual provider.

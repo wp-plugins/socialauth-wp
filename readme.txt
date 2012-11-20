@@ -14,7 +14,10 @@ SocialAuth-WordPress a Wordpress 3.0+ plugin which enables social login integrat
 
 SocialAuth-WordPress a Wordpress 3.0+ plugin derived from popular PHP based HybridAuth library. Inspired from other Wordpress social login plugins, this plugin seamlessly integrates into any Wordpress 3.0+ application and enables social login integration through different service providers. All you have to do is to configure the plugin from settings page before you can start using it. SocialAuth-WordPress hides all the intricacies of generating signatures and token, doing security handshakes and provides an out of the box a simple solution to interact with providers.
 
-Please check out our [detailed wiki](http://code.google.com/p/socialauth-wordpress/) for complete information on this plugin.
+[Click Here](http://socialauth.in/wordpress/wp-login.php) to see Socialauth-WordPress in action.
+
+Please check out [Developer Notes](http://wordpress.org/extend/plugins/socialauth-wp/other_notes/) for more information on this plugin.
+
 You can also check [socialauth.in](http://socialauth.in) to get similar libraries in other technologies under SocialAuth umbrella.
 
 == Installation ==
@@ -96,3 +99,12 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 
 * Your blog users - Instead of creating new account on website, users can use their existing accounts from popular providers like Facebook etc. making it easier for them to access/contribute content.
 * Blog administrators/owners - With no registration requirement, users can quickly login to the site and use its features. Further, users trust big providers (like Facebook etc.) making them comfortable in login process. This fast and trusted login process definitely attracts potential users and increase site popularity. Site administrator can set the permission for users who will login with external login provider.
+
+== Plugin Settings ==
+
+SocialAuth-WordPress provides a nice settings interface to make it easy to use and configurable for your users and administrators out of the box.
+* You can configure the default role which will be given to users which will connects to your app with help of this plugin.
+* You can also set up a default landing page for the users using logon feautres of this plugin.
+* Setting inerface allows you to enable disable individual provider.
+* When registering with Logon provider to get app_key and app_secret, some case you require you to supply a redirect_uri; you can get that from settings page.
+* Administrator can also control how logon prompts appear to users. It can be either on same window or a pop up window.

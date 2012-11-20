@@ -108,3 +108,18 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 * Setting inerface allows you to enable disable individual provider.
 * When registering with Logon provider to get app_key and app_secret, some case you require you to supply a redirect_uri; you can get that from settings page.
 * Administrator can also control how logon prompts appear to users. It can be either on same window or a pop up window.
+
+== Adding More Providers ==
+
+* Download additional providers packages from http://hybridauth.sourceforge.net/download.html#index
+* you will get a zip file, unzip it and look for hybridauth-vkontakte folder in it.
+* Once you find that folder, you will see another directory named 'Providers' and a file file in it named 'Vkontakte.php'.
+* Copy this .php file to our plugin in socialAuth-wp->hybridauth->Hybrid->Providers.
+* Next, go to socialAuth-wp->hybridauth->config.php and at the end of providers array add followings lines:
+
+"NEW_PROVIDER_CODE" => array (
+        "enabled" => true,
+	"keys"    => array ( "id" => "", "secret" => "" )
+),
+* Login to your WordPress installation by Admin user and in the SocialAuth-Worpdress settings, Vkontakte started appearing. It will be disabled initially, enable it by providing "Id", "secret" values.
+* This is it. You are done.

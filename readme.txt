@@ -33,7 +33,7 @@ You can also check [socialauth.in](http://socialauth.in) to get similar librarie
 
 = Where can I find more information? =
 
-Please check out [Developer Notes](http://wordpress.org/extend/plugins/socialauth-wp/other_notes/) for more information on this plugin or feel free to email us a.
+Please check out [Developer Notes](http://wordpress.org/extend/plugins/socialauth-wp/other_notes/) for more information on this plugin or feel free to email us.
 
 = Where will I get the application keys? =
 

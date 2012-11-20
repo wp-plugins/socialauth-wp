@@ -25,7 +25,7 @@ You can also check [socialauth.in](http://socialauth.in) to get similar librarie
 * Login to your wordpress site as admin, go to plugins menu and search for "SocialAuth-WordPress".
 * Add the plugin to you plugins directory.
 * From the plugin administration, enable the plugin.
-* Go to Settings > SocialAuth-WordPress  from left side menu.
+* Go to Settings > SocialAuth-WordPress from left side menu.
 * Configure plugin settings such as enabling one or more providers and providing your application keys.
 * Go to login page and see the magic.
 
@@ -41,7 +41,7 @@ Application keys need to be generated for each provider you want to enable. For 
 
 = Which providers are supported by the plugin? =
 
-The plugin supports all providers supported by HybridAuth library. All major providers such as Facebook, Google, Twitter, LinkedIn, Yahoo are supported. Please check out the [HybridAuth page](http://hybridauth.sourceforge.net/userguide.html) for the complete list. 
+The plugin supports all providers supported by HybridAuth library. All major providers such as Facebook, Google, Twitter, LinkedIn, and Yahoo are supported. Please check out the [HybridAuth page](http://hybridauth.sourceforge.net/userguide.html) for the complete list. 
 
 = I downloaded and enabled the plugin, but no providers appear on login page. What's wrong? =
 
@@ -57,7 +57,7 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 == Changelog ==
 
 = 1.3.2 =
-* Logged -in user profile picture/avatar source can be controlled from plugin settings. By default wordpress tries to fetch avatar from Http://gravatar.com using email address in you profile, you can overide that seting from plugin settings page and force wordpress to get profile pciture/avatar from social media provider user is currently logged-in with.
+* Logged -in user profile picture/avatar source can be controlled from plugin settings. By default Wordpress tries to fetch avatar from Http://gravatar.com using email address in you profile, you can override that setting from plugin settings page and force Wordpress to get profile picture/avatar from social media provider user is currently logged-in with.
 
 = 1.2.2 =
 * Added functionality to set display order of providers on login page
@@ -87,13 +87,13 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 
 == Features == 
 
-* Authenticate users with Facebook, Yahoo, Google, MSN, Twitter, MySpace and LinkedIn etc (Provider support depends on provider supported by HybridAuth library).
+* Authenticate users with Facebook, Yahoo, Google, MSN, Twitter, MySpace and LinkedIn etc. (Provider support depends on provider supported by HybridAuth library).
 * Access profile of logged in user (Email, First name, Last name, Profile picture)
 * See contacts/friends of logged in user. Friend information contains information such as email, profile URL and name.
 * More control over logout from application as well as authenticating provider.
 * Administrator can control the default role for users who register via SocialAuth-WordPress.
 * Administrator can set display order of providers for login page.
-* Added new option in settings page to set how authentication will open (There are 2 options - In page itself and In a pop-up window) 
+* Added new option in settings page to set how authentication will open (There are 2 options - In page itself and in a pop-up window) 
 
 == Benefits ==
 
@@ -103,18 +103,26 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 == Plugin Settings ==
 
 * SocialAuth-WordPress provides a nice settings interface to make it easy to use and configurable for your users and administrators out of the box.
-* You can configure the default role which will be given to users which will connects to your app with help of this plugin.
-* You can also set up a default landing page for the users using logon feautres of this plugin.
-* Setting inerface allows you to enable disable individual provider.
+* You can configure the default role which will be given to users which will connect to your app with help of this plugin.
+* You can also set up a default landing page for the users using logon features of this plugin.
+* Setting interface allows you to enable disable individual provider.
 * When registering with Logon provider to get app_key and app_secret, some case you require you to supply a redirect_uri; you can get that from settings page.
 * Administrator can also control how logon prompts appear to users. It can be either on same window or a pop up window.
+* Plugin setting interface provides a nice options with which you can control providers icons display order on login screen. Let's sy you want Google Icon to appear first, make it first on first position from settings page and its position will get changed on login page.
 
 == Adding More Providers ==
 
-* Download additional providers packages from http://hybridauth.sourceforge.net/download.html#index
-* you will get a zip file, unzip it and look for hybridauth-vkontakte folder in it.
-* Once you find that folder, you will see another directory named 'Providers' and a file file in it named 'Vkontakte.php'.
+* Download additional provider’s packages from http://hybridauth.sourceforge.net/download.html#index
+* You will get a zip file, unzip it and look for hybridauth-RPOVIDER-NAME folder in it.
+* Once you find that folder, you will see another directory named 'Providers' and a file in it named like 'PROVIDER.php'.
 * Copy this .php file to our plugin in socialAuth-wp->hybridauth->Hybrid->Providers.
 * Next, go to socialAuth-wp->hybridauth->config.php and at the end of providers array add followings lines: <br /> "NEW_PROVIDER_CODE" => array ( "enabled" => true, "keys"    => array ( "id" => "", "secret" => "" )),
-* Login to your WordPress installation by Admin user and in the SocialAuth-Worpdress settings, Vkontakte started appearing. It will be disabled initially, enable it by providing "Id", "secret" values.
+* Login to your WordPress installation by Admin user and in the SocialAuth-Worpdress settings, NEW PROVIDER started appearing. It will be disabled initially, enable it by providing "Id", "secret" values.
 * This is it. You are done.
+
+== Tips on enabling provider ==
+
+* Considering the fact that there are some pre-requisites for enabling providers. There are 3 categories of providers
+** In first category providers can be simply enabled by changing its status from settings page of your WordPress plugin admin. Yahoo is an example for this.
+** In other category providers need changing the status from Wordpress settings as well as some information bits, mostly referred as 'App Key' and 'App Secret'. For all such providers you will need to register with provider first to obtain those information bits. Google is an example for this.
+** In third category providers need changing the status from Wordpress settings, and a registration with Provider similar to category 2 above but in this particular case when registering with Provider, you will be asked for 'redirect Uri'. You need not to dig out this information yourself, just go to Plugin settings page & you will see this information is there for you with each provider.

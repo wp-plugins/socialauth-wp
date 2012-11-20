@@ -112,7 +112,7 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 
 == Adding More Providers ==
 
-* Download additional provider’s packages from http://hybridauth.sourceforge.net/download.html#index
+* Download additional provider packages from http://hybridauth.sourceforge.net/download.html#index
 * You will get a zip file, unzip it and look for hybridauth-RPOVIDER-NAME folder in it.
 * Once you find that folder, you will see another directory named 'Providers' and a file in it named like 'PROVIDER.php'.
 * Copy this .php file to our plugin in socialAuth-wp->hybridauth->Hybrid->Providers.
@@ -122,7 +122,7 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 
 == Tips on enabling provider ==
 
-* Considering the fact that there are some pre-requisites for enabling providers. There are 3 categories of providers
-** In first category providers can be simply enabled by changing its status from settings page of your WordPress plugin admin. Yahoo is an example for this.
-** In other category providers need changing the status from Wordpress settings as well as some information bits, mostly referred as 'App Key' and 'App Secret'. For all such providers you will need to register with provider first to obtain those information bits. Google is an example for this.
-** In third category providers need changing the status from Wordpress settings, and a registration with Provider similar to category 2 above but in this particular case when registering with Provider, you will be asked for 'redirect Uri'. You need not to dig out this information yourself, just go to Plugin settings page & you will see this information is there for you with each provider.
+* Considering the fact that there are some pre-requisites for enabling providers. There are 3 categories of providers which are briefed below.
+* In first category providers can be simply enabled by changing its status from settings page of your WordPress plugin admin. Yahoo is an example for this.
+* In other category providers need changing the status from Wordpress settings as well as some information bits, mostly referred as 'App Key' and 'App Secret'. For all such providers you will need to register with provider first to obtain those information bits. Google is an example for this.
+* In third category providers need changing the status from Wordpress settings, and a registration with Provider similar to category 2 above but in this particular case when registering with Provider, you will be asked for 'redirect Uri'. You need not to dig out this information yourself, just go to Plugin settings page & you will see this information is there for you with each provider.

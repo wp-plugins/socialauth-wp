@@ -118,4 +118,4 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 * When registering with Logon provider to get app_key and app_secret, some case you require you to supply a redirect_uri; you can get that from settings page.
 * Administrator can also control how logon prompts appear to users. It can be either on same window or a pop up window.
 * Administrator can control showing on login provider icons on comment and registration page, this is will help users to directly logon from there without going to login page.
-* Admin can enable optional e-mail verification for new users to force email verification when a new user first time comes to your site.
+* Administrator can enable optional e-mail verification for new users to force email verification when a new user first time comes to your site.

@@ -25,6 +25,12 @@ function sc_render_login_form_SocialAuth_WP() {
         }
     }
     echo "</div>";
-} 
-add_action( 'login_form','sc_render_login_form_SocialAuth_WP' );
+}
+
+$enabledPages = get_option('SocialAuth_WP_providerIcons_host_pages');
+
+foreach($enabledPages as $page)
+{
+	add_action( $page . '_form','sc_render_login_form_SocialAuth_WP' );
+}
 ?>

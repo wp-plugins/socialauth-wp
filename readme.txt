@@ -1,5 +1,5 @@
 === Socialauth-WordPress ===
-Contributors: tsg@brickred.com
+Contributors: labs@3pillarglobal.com
 Donate link: http://www.3pillarglobal.com
 Tags: socialauth wordpress, social login integration, hybridauth, authentication, contacts, friendlist, providers
 Requires at least: 3.0.0
@@ -22,10 +22,10 @@ You can also check [socialauth.in](http://socialauth.in) to get similar librarie
 
 == Installation ==
 
-* Login to your wordpress site as admin, go to plugins menu and search for "SocialAuth-WordPress".
+* Login to your WordPress site as admin, go to plugins menu and search for "SocialAuth-WordPress".
 * Add the plugin to you plugins directory.
 * From the plugin administration, enable the plugin.
-* Go to Settings > SocialAuth-WordPress  from left side menu.
+* Go to Settings > SocialAuth-WordPress from left side menu.
 * Configure plugin settings such as enabling one or more providers and providing your application keys.
 * Go to login page and see the magic.
 
@@ -56,8 +56,14 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 
 == Changelog ==
 
+= 1.5.5 =
+* Added admin controlled email verification for new users. This is quite useful where login provider do no validate user e-mail, enabling this will allow only users with active email account to register with you WordPress site.
+* Added an option in admin-settings to enable showing on login provider icons on comment and registration page, this is will help users to directly logon from there without going to login page.
+* Fixed a bug on admin-settings page where 'provider ordering' block was throwing error on new setup.
+* Updated some code blocks to get more quality and made changes to some messages to make them more meaningful.
+ 
 = 1.3.2 =
-* Logged -in user profile picture/avatar source can be controlled from plugin settings. By default wordpress tries to fetch avatar from Http://gravatar.com using email address in you profile, you can overide that seting from plugin settings page and force wordpress to get profile pciture/avatar from social media provider user is currently logged-in with.
+* Logged -in user profile picture/avatar source can be controlled from plugin settings. By default WordPress tries to fetch avatar from Http://gravatar.com using email address in you profile, you can override that setting from plugin settings page and force WordPress to get profile picture/avatar from social media provider user is currently logged-in with.
 
 = 1.2.2 =
 * Added functionality to set display order of providers on login page
@@ -72,8 +78,11 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 
 == Upgrade Notice ==
 
+= 1.5.5 =
+There has been addition of 2 new features and 3 bug fixes since last release. Update to get latest and enjoy more features.
+
 = 1.3.2 =
-There has been addition of 1 new features since last release. Update to get latest and enjoy more features.
+There has been addition of 1 new feature since last release. Update to get latest and enjoy more features.
 
 = 1.2.2 =
 There has been 1 bug fix and addition of 2 new features since last release. Update to get latest.
@@ -103,8 +112,10 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 == Plugin Settings ==
 
 * SocialAuth-WordPress provides a nice settings interface to make it easy to use and configurable for your users and administrators out of the box.
-* You can configure the default role which will be given to users which will connects to your app with help of this plugin.
-* You can also set up a default landing page for the users using logon feautres of this plugin.
-* Setting inerface allows you to enable disable individual provider.
+* You can configure the default role which will be given to users which will connect to your app with help of this plugin.
+* You can also set up a default landing page for the users using logon features of this plugin.
+* Setting interface allows you to enable disable individual provider.
 * When registering with Logon provider to get app_key and app_secret, some case you require you to supply a redirect_uri; you can get that from settings page.
 * Administrator can also control how logon prompts appear to users. It can be either on same window or a pop up window.
+* Administrator can control showing on login provider icons on comment and registration page, this is will help users to directly logon from there without going to login page.
+* Admin can enable optional e-mail verification for new users to force email verification when a new user first time comes to your site.

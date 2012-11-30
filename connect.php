@@ -1,11 +1,12 @@
 <?php
+
+//error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
     if( isset( $_GET["provider"] ) ){
         try{
             // load hybridauth
             require_once( dirname(__FILE__) . "/hybridauth/Hybrid/Auth.php" );
             // load wp-load.php
-            $parse_uri = explode('wp-content', dirname(__FILE__));
-            $wp_load = $parse_uri[0].'wp-load.php';
+            $wp_load = dirname(dirname(dirname(dirname(__FILE__)))).'/wp-load.php'; 
             require_once($wp_load);
 
             include_once 'common.php';
@@ -38,6 +39,8 @@
             //set return url here
             //OpenId is a special case
             $adapter = null;
+            $emailVerificationHash = uniqid();
+            $user_data = array();
             if($provider == 'OpenID') 
             {
                 $adapter = $hybridauth->authenticate( $provider, array("openid_identifier" => 'https://openid.stackexchange.com'));
@@ -54,11 +57,14 @@
             if ( $user_id ) {
                 $user_data  = get_userdata( $user_id );
                 $user_login = $user_data->user_login;
+                $emailVerificationHash = get_user_meta( $user_id, 'email_verification_hash', true );
+                 
             // User not found by provider identity, check by email
             } elseif ( $user_id = email_exists( $ha_user_profile->email ) ) {
                 //update_user_meta( $user_id, $provider, $ha_user_profile->identifier );
                 $user_data  = get_userdata( $user_id );
                 $user_login = $user_data->user_login;
+                $emailVerificationHash = get_user_meta( $user_id, 'email_verification_hash', true );
             } else { // Create new user and associate provider identity
                 $displayNameArray = explode(" ", $ha_user_profile->displayName);
 
@@ -78,7 +84,7 @@
                      $user_login = $user_login . rand();
                 }
                 
-                $userdata = array(
+                $user_data = array(
                     'user_login' => ($ha_user_profile->email)? $ha_user_profile->email : $user_login,
                     'user_email' => ($ha_user_profile->email)? $ha_user_profile->email : $user_login . "@test.com",
                     'first_name' => ($ha_user_profile->firstName)? $ha_user_profile->firstName : $firstname,
@@ -89,31 +95,36 @@
                 $SocialAuth_WP_user_role = get_option('SocialAuth_WP_user_role');
                 if(!empty($SocialAuth_WP_user_role))
                 {
-                    $userdata['role'] = $SocialAuth_WP_user_role;
+                    $user_data['role'] = $SocialAuth_WP_user_role;
                 }
 
+                $validateEmail = get_option('SocialAuth_WP_validate_newUser_email');
+                
+                $emailVerificationHash = (!empty($validateEmail) && $validateEmail == 'validate')? 'validated': $emailVerificationHash;
+               
                 // Create a new user
-                $user_id = wp_insert_user( $userdata );
+                $user_id = wp_insert_user( $user_data );
             }
             if ( $user_id && is_integer( $user_id ) ) {
                 update_user_meta( $user_id, 'ha_login_provider', $provider );
                 update_user_meta( $user_id, 'profile_image_url', $ha_user_profile->photoURL);
+                update_user_meta( $user_id, 'email_verification_hash', $emailVerificationHash);
             }
+            
+            if($emailVerificationHash != 'validated')
+            {
+            	$userEmail = is_array($user_data)? $user_data['user_email']: $user_data->user_email;
+            	sendEmailVerificationEmail($userEmail, $user_id, $emailVerificationHash);
+            	endAuthProcessAndRedirectToHomePage(plugin_dir_url(__FILE__) . 'verifyEmail.php');
+            	die;
+            }
+            
             wp_set_auth_cookie( $user_id );
             do_action( 'wp_login', $user_id );
 
             $SocialAuth_WP_user_home = get_option('SocialAuth_WP_user_home_page');
             $user_home_page = !empty($SocialAuth_WP_user_home)? $SocialAuth_WP_user_home : get_site_url();
-            $authDialogPosition = get_option('SocialAuth_WP_authDialog_location');
-            if(!empty($authDialogPosition) && $authDialogPosition == 'page')
-            {
-                 header('Location: ' . $user_home_page);
-            }else {
-                echo "<script type='text/javascript'>
-                opener.location.href = '" . $user_home_page ."';
-                close();
-                </script>";
-            }
+            endAuthProcessAndRedirectToHomePage($user_home_page);
         }
         catch( Exception $e ){
             $message = "Some strange error occured, Please try again Later...";

@@ -32,6 +32,8 @@ function SocialAuth_WP_register_settings() {
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_user_home_page');
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_providers');
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_profile_picture_source');
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_providerIcons_host_pages');
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_validate_newUser_email');
 }
 
 function SocialAuth_WP_scripts()
@@ -93,7 +95,7 @@ function SocialAuth_WP_render_settings_page(){
                           ?>
                         
                         </select>
-                        <span class="description">Users singing in Social Auth Login provider will get access rights from this role.</span>
+                        <span class="description">Users signing in Social Auth Login provider will get access rights from this role.</span>
                     </td>
                 </tr>
                 <?php } ?>
@@ -159,9 +161,10 @@ function SocialAuth_WP_render_settings_page(){
                         <ul id="providerlist" class="ui-sortable">
                         <?php 
                         // sort by display_order
-                        uasort($SocialAuth_WP_providers, 'compare_displayOrder');
-                        foreach($SocialAuth_WP_providers as $name => $details) { 
-                            $details = $HA_PROVIDER_CONFIG['providers'][$name];
+                        $providersDataForDisplayOrder = empty($SocialAuth_WP_providers)? $HA_PROVIDER_CONFIG['providers']: $SocialAuth_WP_providers;
+                        uasort($providersDataForDisplayOrder, 'compare_displayOrder');
+                        foreach($providersDataForDisplayOrder as $name => $details) { 
+                            //$details = $HA_PROVIDER_CONFIG['providers'][$name];
                         ?>
                             <li class="<?php echo $name; ?>">
                                 <img alt="<?php echo $name; ?>" src="<?php echo $images_url . strtolower($name) . '_32.png'; ?>" />
@@ -171,6 +174,34 @@ function SocialAuth_WP_render_settings_page(){
                         ?>
                         </ul>
                         <span class="description">Drag and drop icons to arrange them, and they will appear on login page in same order.</span>
+                    </td>
+                </tr>
+                <tr valign="top">
+                	<?php 
+                		$pages = array('login', 'register', 'comment');
+                		$enabledPages = get_option('SocialAuth_WP_providerIcons_host_pages');
+                	?>
+                    <th scope="row"><label for ="SocialAuth_WP_providerIcons_host_pages" ><?php _e('Provider Icons Visible on', 'SocialAuth_WP'); ?></label></th>
+                    <td>
+                        <ul id="providerlist">
+                        	<?php foreach($pages as $page) {?>
+                        	    <?php $isChecked = ((isset($enabledPages[$page]) && ($enabledPages[$page] == $page))|| $page == 'login')? "checked='checked'": ""; ?>
+                        		<li><input type="checkbox" name="SocialAuth_WP_providerIcons_host_pages[<?php echo $page;?>]" value="<?php echo $page;?>" <?php echo $isChecked;?> /> <?php echo ucfirst($page);?> Form</li>
+                        	<?php }?>
+                        </ul>
+                        <span class="description">Enable/Disable visibility of Provider Icons on various pages.</span>
+                    </td>
+                </tr>
+                
+                <tr valign="top">
+                	<?php 
+                		$validateEmail = get_option('SocialAuth_WP_validate_newUser_email');
+                	?>
+                    <th scope="row"><label for ="SocialAuth_WP_validate_newUser_email" ><?php _e("Validate New User's E-mail", 'SocialAuth_WP'); ?></label></th>
+                    <td>
+                        <?php $isChecked = (!empty($validateEmail) && ($validateEmail == 'validate'))? "checked='checked'": ""; ?>
+                        <input type="checkbox" name="SocialAuth_WP_validate_newUser_email" value="validate" <?php echo $isChecked;?> /> Yes, force user for email validation
+                        <span class="description">This will add an another step of email validation for new users before they can get in.</span>
                     </td>
                 </tr>
             </table>

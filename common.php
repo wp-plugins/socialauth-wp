@@ -28,3 +28,27 @@ function compare_displayOrder($a, $b)
     }
     return ($a['display_order'] < $b['display_order']) ? -1 : 1;
 }
+
+function sendEmailVerificationEmail($to, $user_id, $emailVerificationHash, $subject= 'Email verification for new account', $message = null)
+{
+	$headers = "";
+	$attachments = "";
+	
+	include_once dirname(__FILE__) . "/email_verification_template.php";
+	
+	wp_mail( $to, $subject, $message, $headers, $attachments );
+}
+
+function endAuthProcessAndRedirectToHomePage($user_home_page)
+{
+	$authDialogPosition = get_option('SocialAuth_WP_authDialog_location');
+	if(!empty($authDialogPosition) && $authDialogPosition == 'page')
+	{
+		header('Location: ' . $user_home_page); die;
+	}else {
+		echo "<script type='text/javascript'>
+                opener.location.href = '" . $user_home_page ."';
+                close();
+                </script>";
+	}
+}

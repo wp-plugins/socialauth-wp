@@ -9,8 +9,7 @@ function SocialAuth_WP_contacts(){
     // load hybridauth
     require_once( dirname(__FILE__) . "/hybridauth/Hybrid/Auth.php" );
     // load wp-load.php
-    $parse_uri = explode('wp-content', dirname(__FILE__));
-    $wp_load = $parse_uri[0].'wp-load.php';
+    $wp_load = dirname(dirname(dirname(dirname(__FILE__)))).'/wp-load.php'; 
     require_once($wp_load);
     include_once 'common.php';
     

@@ -1,8 +1,7 @@
 <?php
 $a = urldecode($_GET['redirect_to']);
 
-$parse_uri = explode('wp-content', dirname(__FILE__));
-$wp_load = $parse_uri[0].'wp-load.php';
+$wp_load = dirname(dirname(dirname(dirname(__FILE__)))).'/wp-load.php'; 
 require_once($wp_load);
 
 include_once 'common.php';

@@ -178,14 +178,14 @@ function SocialAuth_WP_render_settings_page(){
                 </tr>
                 <tr valign="top">
                 	<?php 
-                		$pages = array('login', 'register', 'comment');
+                		$pages = array('register', 'comment');
                 		$enabledPages = get_option('SocialAuth_WP_providerIcons_host_pages');
                 	?>
                     <th scope="row"><label for ="SocialAuth_WP_providerIcons_host_pages" ><?php _e('Provider Icons Visible on', 'SocialAuth_WP'); ?></label></th>
                     <td>
                         <ul id="providerlist">
                         	<?php foreach($pages as $page) {?>
-                        	    <?php $isChecked = ((isset($enabledPages[$page]) && ($enabledPages[$page] == $page))|| $page == 'login')? "checked='checked'": ""; ?>
+                        	    <?php $isChecked = (isset($enabledPages[$page]) && ($enabledPages[$page] == $page))? "checked='checked'": ""; ?>
                         		<li><input type="checkbox" name="SocialAuth_WP_providerIcons_host_pages[<?php echo $page;?>]" value="<?php echo $page;?>" <?php echo $isChecked;?> /> <?php echo ucfirst($page);?> Form</li>
                         	<?php }?>
                         </ul>

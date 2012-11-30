@@ -27,10 +27,17 @@ function sc_render_login_form_SocialAuth_WP() {
     echo "</div>";
 }
 
-$enabledPages = get_option('SocialAuth_WP_providerIcons_host_pages');
+//login enabled by default
+add_action('login_form','sc_render_login_form_SocialAuth_WP' );
 
-foreach($enabledPages as $page)
+
+// these are controlled from settings
+$enabledPages = get_option('SocialAuth_WP_providerIcons_host_pages');
+if(is_array($enabledPages))
 {
-	add_action( $page . '_form','sc_render_login_form_SocialAuth_WP' );
+	foreach($enabledPages as $page)
+	{
+		add_action( $page . '_form','sc_render_login_form_SocialAuth_WP' );
+	}
 }
 ?>

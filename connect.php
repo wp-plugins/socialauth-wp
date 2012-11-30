@@ -40,6 +40,7 @@
             //OpenId is a special case
             $adapter = null;
             $emailVerificationHash = uniqid();
+            $validateEmail = get_option('SocialAuth_WP_validate_newUser_email');
             $user_data = array();
             if($provider == 'OpenID') 
             {
@@ -57,14 +58,22 @@
             if ( $user_id ) {
                 $user_data  = get_userdata( $user_id );
                 $user_login = $user_data->user_login;
-                $emailVerificationHash = get_user_meta( $user_id, 'email_verification_hash', true );
+                $currentEmailVerificationHash = get_user_meta( $user_id, 'email_verification_hash', true );
+                if(!empty($currentEmailVerificationHash))
+                {
+                	$emailVerificationHash = $currentEmailVerificationHash;
+                }	
                  
             // User not found by provider identity, check by email
             } elseif ( $user_id = email_exists( $ha_user_profile->email ) ) {
                 //update_user_meta( $user_id, $provider, $ha_user_profile->identifier );
                 $user_data  = get_userdata( $user_id );
                 $user_login = $user_data->user_login;
-                $emailVerificationHash = get_user_meta( $user_id, 'email_verification_hash', true );
+            	$currentEmailVerificationHash = get_user_meta( $user_id, 'email_verification_hash', true );
+                if(!empty($currentEmailVerificationHash))
+                {
+                	$emailVerificationHash = $currentEmailVerificationHash;
+                }
             } else { // Create new user and associate provider identity
                 $displayNameArray = explode(" ", $ha_user_profile->displayName);
 
@@ -98,9 +107,7 @@
                     $user_data['role'] = $SocialAuth_WP_user_role;
                 }
 
-                $validateEmail = get_option('SocialAuth_WP_validate_newUser_email');
-                
-                $emailVerificationHash = (!empty($validateEmail) && $validateEmail == 'validate')? 'validated': $emailVerificationHash;
+                //$emailVerificationHash = (!empty($validateEmail) && $validateEmail == 'validate')? 'validated': $emailVerificationHash;
                
                 // Create a new user
                 $user_id = wp_insert_user( $user_data );
@@ -111,7 +118,7 @@
                 update_user_meta( $user_id, 'email_verification_hash', $emailVerificationHash);
             }
             
-            if($emailVerificationHash != 'validated')
+            if(!empty($validateEmail) && $validateEmail == 'validate' && $emailVerificationHash != 'validated')
             {
             	$userEmail = is_array($user_data)? $user_data['user_email']: $user_data->user_email;
             	sendEmailVerificationEmail($userEmail, $user_id, $emailVerificationHash);

@@ -1,10 +1,10 @@
 === Socialauth-WordPress ===
 Contributors: labs@3pillarglobal.com
 Donate link: http://www.3pillarglobal.com
-Tags: socialauth wordpress, social login integration, hybridauth, authentication, contacts, friendlist, providers
+Tags: socialauth wordpress, social login integration, hybridauth, authentication, contacts, friendlist, providers, openid, providers
 Requires at least: 3.0.0
 Tested up to: 3.4.2
-Stable tag: 1.5.6
+Stable tag: 2.7.11
 License: MIT License
 License URI: http://www.opensource.org/licenses/MIT
 
@@ -56,6 +56,14 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 
 == Changelog ==
 
+= 2.7.11 =
+* Upgraded HybridAuth library to 2.1.1
+* Added an option to admin-settings to not to show complete logout warning on logout.
+* Added Curl-SSL support check to requirements.
+* Fixed Twitter multiple profiles issue.
+* User is automatically logged in after email verification.
+* Some minor changes to messages and code quality.
+
 = 1.5.5 =
 * Added admin controlled email verification for new users. This is quite useful where login provider do no validate user e-mail, enabling this will allow only users with active email account to register with you WordPress site.
 * Added an option in admin-settings to enable showing on login provider icons on comment and registration page, this is will help users to directly logon from there without going to login page.
@@ -77,6 +85,9 @@ Once you have downloaded and enabled the plugin, you need to go to the settings 
 * First stable release
 
 == Upgrade Notice ==
+
+= 2.7.11 =
+There has been addition of 3 new features and 5 bug fixes since last release. Update to get latest and enjoy more features.
 
 = 1.5.5 =
 There has been addition of 2 new features and 3 bug fixes since last release. Update to get latest and enjoy more features.
@@ -118,4 +129,10 @@ See the [live demo](http://socialauth.in/wordpress/wp-login.php) now!
 * When registering with Logon provider to get app_key and app_secret, some case you require you to supply a redirect_uri; you can get that from settings page.
 * Administrator can also control how logon prompts appear to users. It can be either on same window or a pop up window.
 * Administrator can control showing on login provider icons on comment and registration page, this is will help users to directly logon from there without going to login page.
-* Administrator can enable optional e-mail verification for new users to force email verification when a new user first time comes to your site.
+* Administrator can enable optional e-mail verification for new users to force email verification when a new user first time comes to your site. This will only applied to users coming thorugh providers which do not share user email in open-auth/social-auth
+* Administrator can control whether or not to show complete session end message on logout or not.
+
+== Credits ==
+
+* HybridAuth Library - A open source social sign on php library residing in core of plugin and providing inteface to connect to various login providers.
+* A lot many thanks to Viruthagiri Thirumavalavan (one of most active plugin users) for using, raising bugs and suggesting enhancements to make this plugin better. 

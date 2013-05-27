@@ -108,7 +108,7 @@
     }
 
     /**
-     * Set the main seperator character
+     * Set the main separator character
      * 
      * By default this will implode an empty string
      * 

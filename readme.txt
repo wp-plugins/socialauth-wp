@@ -21,10 +21,11 @@ Please check out [Developer Notes](http://wordpress.org/extend/plugins/socialaut
 You can also check [labs.3pillarglobal.com](http://labs.3pillarglobal.com/) to get similar libraries in other technologies under SocialAuth umbrella.
 
 What's new in latest release?
-* Introduced plugin short code [SocialAuth-WP-Short-Code]. Use in pages/posts.
-* If new registrations are disabled, new users can not login to your WordPress site.
-* New option in plugin settings to hide 'My Contacts' option from left navigation bar of dashboard.
-* Post login redirect capability to get user back to the page from where you initiated login process.
+
+*  Introduced plugin short code [SocialAuth-WP-Short-Code]. Use in pages/posts.
+*  If new registrations are disabled, new users can not login to your WordPress site.
+*  New option in plugin settings to hide 'My Contacts' option from left navigation bar of dashboard.
+*  Post login redirect capability to get user back to the page from where you initiated login process.
 
 == Installation ==
 

@@ -225,7 +225,7 @@ function SocialAuth_WP_render_settings_page(){
                     <td>
                         <?php $isChecked = (!empty($hideMyContacts) && ($hideMyContacts == 'hide'))? "checked='checked'": ""; ?>
                         <input type="checkbox" name="SocialAuth_WP_hide_my_contacts" value="hide" <?php echo $isChecked;?> /> Yes, hide this menu
-                        <span class="description">This is to allow you to not to show 'My Contacts' page to users connecting to your site by Social Authentication. Leave this blank if you want 'My Contact' menu visible.</span>
+                        <span class="description">This is to allow you to not to show 'My Contacts' page to users connecting to your site by Social Authentication. Leave this unchecked if you want 'My Contact' menu to be visible.</span>
                     </td>
                 </tr>
             </table>

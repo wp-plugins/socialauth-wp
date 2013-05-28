@@ -8,7 +8,7 @@ Stable tag: 3.11.13
 License: MIT License
 License URI: http://www.opensource.org/licenses/MIT
 
-SocialAuth-WordPress a WordPress 3.0+ plugin which enables social login integration and other services through different providers (eg. Facebook, Twitter).
+SocialAuth-WordPress a WordPress 3.0+ plugin which enables social login integration through different providers (eg. Facebook, Twitter).
 
 == Description ==
 
@@ -19,6 +19,12 @@ SocialAuth-WordPress a WordPress 3.0+ plugin derived from popular PHP based Hybr
 Please check out [Developer Notes](http://wordpress.org/extend/plugins/socialauth-wp/other_notes/) for more information on this plugin.
 
 You can also check [socialauth.in](http://socialauth.in) to get similar libraries in other technologies under SocialAuth umbrella.
+
+What's new in latest release?
+* Introduced plugin short code [SocialAuth-WP-Short-Code]. Use in pages/posts.
+* If new registrations are disabled, new users can not login to your WordPress site.
+* New option in plugin settings to hide 'My Contacts' option from left navigation bar of dashboard.
+* Post login redirect capability to get user back to the page from where you initiated login process.
 
 == Installation ==
 

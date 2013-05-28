@@ -13,7 +13,7 @@
             // selected provider name
             $provider = @ trim( strip_tags( $_GET["provider"] ) );
 
-            // build required configuratoin for this provider
+            // build required configuration for this provider
             $SocialAuth_WP_providers = get_option('SocialAuth_WP_providers');
             if(is_array($SocialAuth_WP_providers) && count($SocialAuth_WP_providers))
             {
@@ -21,10 +21,10 @@
                 if(isset($SocialAuth_WP_providers[$provider])) {
                     $config["base_url"]  = plugin_dir_url(__FILE__) . 'hybridauth/';
                     $config["providers"] = array();
-                    //this si same as orig config, no need to amke config again
+                    //this si same as orig config, no need to make config again
                     $config["providers"][$provider] = $SocialAuth_WP_providers[$provider];
                 } else {
-                    echo "Current Provider is unknowun to system.";
+                    echo "Current Provider is unknown to system.";
                     return;
                 }
             }
@@ -76,6 +76,12 @@
                 	$emailVerificationHash = $currentEmailVerificationHash;
                 }
             } else { // Create new user and associate provider identity
+
+                //Lets' check if new user creation is allowed or not?
+                $users_can_register = get_option('users_can_register');
+                if(empty($users_can_register) || $users_can_register == 0)
+                    throw new Exception("Site Administrator has disabled new user registration and we are unable to locate an existing account of you within system. Please try again later.", 701);
+
                 $displayNameArray = explode(" ", $ha_user_profile->displayName);
 
                 //for when profile data do not contains first/last name
@@ -89,8 +95,18 @@
                 if(isset($displayNameArray[1]) && count($displayNameArray[1])) {
                     $lastname = $displayNameArray[1];
                 }
-                
+
+                //Setting userName to firstName if firstName available, profile identifier otherwise
                 $user_login = $ha_user_profile->identifier;
+                if(!empty($ha_user_profile->firstName))
+                {
+                    $checkUserName = $ha_user_profile->firstName;
+                    while(username_exists( $checkUserName ))
+                    {
+                        $checkUserName = $ha_user_profile->firstName . rand();
+                    }
+                    $user_login = $checkUserName;
+                }
                                 
                 $user_data = array(
                     'user_login' => ($ha_user_profile->email)? $ha_user_profile->email : $user_login,
@@ -169,26 +185,31 @@
         }
         catch( Exception $e ){
             $message = "Some strange error occured, Please try again Later...";
-			echo $e->getMessage();
             switch( $e->getCode() ){
                 case 0 : $message = "Some strange error occured."; break;
-                case 1 : $message = "It seems Hybriauth is not configuration properly."; break;
+                case 1 : $message = "It seems Hybridauth is not configuration properly."; break;
                 case 2 : $message = "It seems some details are missing in provider configuration."; break;
                 case 3 : $message = "It seems login provider is Unknown or Disabled."; break;
                 case 4 : $message = "It seems you forgot yo mention provider application credentials."; break;
-                case 5 : $message = "Authentification has failed. Either the user has canceled the authentication or the provider refused the connection."; break;
+                case 5 : $message = "Authentication has failed. Either the user has canceled the authentication or the provider refused the connection."; break;
+                case 701 : $message = "Authentication has failed. Either the user has canceled the authentication or the provider refused the connection."; break;
             }
-            
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__FILE__); ?>assets/css/style.css" />
 <div class="SocialAuth_WP SocialAuth_WP_error">
     <p class='highlighted'>There was some unexpected error, when trying to login with <?php echo $provider; ?></p>
-    <p class='highlighted'>Followin are the details of error : </p> 
+    <p class='highlighted'>Following are the details of error : </p>
     <p><?php echo $message; ?></p>
     <p><?php echo 'Error reason: ' .$e->getMessage(); ?></p>
-    <?php if(!empty($authDialogPosition) && $authDialogPosition == 'page') { ?>
-        <p class="">&laquo; <a href="<?php echo wp_get_referer(); ?>" >Back to Login Page</a></p>
-    <?php } ?>
+    <?php
+        $authDialogPosition = get_option('SocialAuth_WP_authDialog_location');
+        if(!empty($authDialogPosition) && $authDialogPosition == 'page') { ?>
+            <p class="">&laquo; <a href="<?php echo wp_get_referer(); ?>" >Back to Login Page</a></p>
+    <?php
+        }else{?>
+            <p class=""><a href="#" onclick="javascript:window.close();" >Close this window</a></p>
+    <?php }
+    ?>
 </div>
 <?php
         die();

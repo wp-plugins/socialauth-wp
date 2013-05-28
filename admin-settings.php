@@ -35,6 +35,7 @@ function SocialAuth_WP_register_settings() {
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_providerIcons_host_pages');
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_validate_newUser_email');
     register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_skip_logout_warning');
+    register_setting( 'SocialAuth-WP-settings', 'SocialAuth_WP_hide_my_contacts');
 }
 
 function SocialAuth_WP_scripts()
@@ -214,6 +215,17 @@ function SocialAuth_WP_render_settings_page(){
                         <?php $isChecked = (!empty($notShowLogoutWarning) && ($notShowLogoutWarning == 'doNotShow'))? "checked='checked'": ""; ?>
                         <input type="checkbox" name="SocialAuth_WP_skip_logout_warning" value="doNotShow" <?php echo $isChecked;?> /> Do not show session warning on logout.
                         <span class="description">If this is enabled user will no longer see warning message on logout which advises user to logout from login provider as well to completely end session.</span>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <?php
+                    $hideMyContacts = get_option('SocialAuth_WP_hide_my_contacts');
+                    ?>
+                    <th scope="row"><label for ="SocialAuth_WP_hide_my_contacts" ><?php _e("Hide My Contacts menu", 'SocialAuth_WP'); ?></label></th>
+                    <td>
+                        <?php $isChecked = (!empty($hideMyContacts) && ($hideMyContacts == 'hide'))? "checked='checked'": ""; ?>
+                        <input type="checkbox" name="SocialAuth_WP_hide_my_contacts" value="hide" <?php echo $isChecked;?> /> Yes, hide this menu
+                        <span class="description">This is to allow you to not to show 'My Contacts' page to users connecting to your site by Social Authentication. Leave this blank if you want 'My Contact' menu visible.</span>
                     </td>
                 </tr>
             </table>
